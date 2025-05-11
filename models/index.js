@@ -8,8 +8,14 @@ const connection = {
   username: process.env.ADMIN_USERNAME,
   password: process.env.ADMIN_PASSWORD,
   host: process.env.HOST,
+  port: parseInt(process.env.PORT, 10),
   dialect: process.env.DIALECT,
-  dialectmodel: process.env.DIALECTMODEL,
+  dialectModule: require(process.env.DIALECTMODEL),
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  }
 };
 const sequelize = new Sequelize(connection);
 const db = {}
